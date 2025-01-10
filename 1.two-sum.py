@@ -6,7 +6,7 @@
 
 # @lc code=start
 from collections import defaultdict
-from typing import Counter
+from typing import Counter, List
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
