@@ -14,7 +14,7 @@ class Solution {
         if (r == m || c == n) {
             return 0;
         }
-        if (r == m  - 1 || c == n - 1) {
+        if (r == m  - 1 && c == n - 1) {
             return 1;
         }
         if (cache[r][c] != 0) {
