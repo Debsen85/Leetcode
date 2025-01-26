@@ -10,7 +10,6 @@ class Solution:
         stack = []
         answer = ""
         open = 0
-        close = 0
 
         for string in s:
             if string == '(':
