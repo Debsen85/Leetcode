@@ -58,7 +58,7 @@ class Solution:
                     if wordCheck in temporary:
                         result.append(wordCheck)
                         temporary.remove(wordCheck)
-                        helper(result, length + 1)
+                        dfs(result, length + 1)
                         result.pop()
                         temporary.add(wordCheck)
             
