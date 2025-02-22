@@ -22,12 +22,12 @@ class Solution:
             if maxLeft <= maxRight:
                 L += 1
                 maxLeft = max(maxLeft, height[L])
-                answer += maxLeft - height[L] if maxLeft - height[L] > 0 else 0
+                answer += maxLeft - height[L]
 
             else:
                 R -= 1
                 maxRight = max(maxRight, height[R])
-                answer += maxRight - height[R] if maxRight - height[R] > 0 else 0
+                answer += maxRight - height[R]
 
         return answer
         
