@@ -18,24 +18,20 @@ class Solution:
         def travel(row, col, flow):
             queue = deque()
             queue.append((row, col))
+            if "A" in flow:
+                atlantic.add((row, col))
+            if "P" in flow:
+                pacific.add((row, col))
             while queue:
                 for _ in range(len(queue)):
                     r, c = queue.popleft()
-                    if "A" in flow:
-                        atlantic.add((r, c))
-                    if "P" in flow:
-                        pacific.add((r, c))
                     for dr, dc in directions:
                         nr, nc = dr + r, dc + c
                         if nr >= 0 and nc >= 0 and nr < ROWS and nc < COLS and heights[r][c] <= heights[nr][nc]:
-                            if flow == "A" and (nr, nc) not in atlantic:
+                            if "A" in flow and (nr, nc) not in atlantic:
                                 atlantic.add((nr, nc))
                                 queue.append((nr, nc))
-                            elif flow == "P" and (nr, nc) not in pacific:
-                                pacific.add((nr, nc))
-                                queue.append((nr, nc))
-                            elif flow == "AP" and ((nr, nc) not in atlantic or (nr, nc) not in pacific):
-                                atlantic.add((nr, nc))
+                            if "P" in flow and (nr, nc) not in pacific:
                                 pacific.add((nr, nc))
                                 queue.append((nr, nc))
         for r in range(ROWS):
