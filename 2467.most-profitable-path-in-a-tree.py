@@ -15,53 +15,57 @@ class Solution:
 
         for u, v in edges:
             adjacencyList[u].append(v)
+            adjacencyList[v].append(u)
 
-        def backtrackingForBob(current, listBob):
+        def backtrackingForBob(current, listBob, visitedBob):
+            if current in visitedBob:
+                return
             if current == bob:
                 self.pathBob = listBob[:]
                 return
+            if current == 0:
+                listBob.append(0)
+            visitedBob.add(current)
 
             for v in adjacencyList[current]:
                 listBob.append(v)
-                backtrackingForBob(v, listBob)
+                backtrackingForBob(v, listBob, visitedBob)
                 listBob.pop()
+            
+            return
 
-        backtrackingForBob(0, [0])
-        
+        backtrackingForBob(0, [], set())
         self.pathBob = self.pathBob[::-1]
-        visitedBob = set(self.pathBob)
-        adjacencyList = [[] for _ in range(len(edges) + 1)]
 
-        for u, v in edges:
-            adjacencyList[u].append(v)
-            adjacencyList[v].append(u)
-
-        def backtrackingForAlice(alice, turn, visitedAlice):
+        def backtrackingForAlice(alice, turn, visitedAlice, visitedBob):
             if alice in visitedAlice:
                 return  -(10 ** 9 + 1)
+
             result = 0
-            if alice in visitedBob:
-                if turn == 0:
-                    result = amount[alice]
-                elif turn < len(self.pathBob):
-                    if self.pathBob[turn] == alice:
+            
+            if turn < len(self.pathBob):
+                if alice not in visitedBob:
+                    if alice == self.pathBob[turn]:
                         result = amount[alice] // 2
-                    elif alice < self.pathBob[turn]:
+                    else:
                         result = amount[alice]
             else:
-                result = amount[alice]
-
-            visitedAlice.add(alice)
-            
-            print(alice, result)
+                if alice not in visitedBob:
+                    result = amount[alice]
 
             maxSum = -(10 ** 9 + 1)
             for v in adjacencyList[alice]:
-                maxSum = max(maxSum, backtrackingForAlice(v, turn + 1, visitedAlice))
+                if turn < len(self.pathBob):
+                    visitedBob.add(self.pathBob[turn])
+                visitedAlice.add(alice)
+                maxSum = max(maxSum, backtrackingForAlice(v, turn + 1, visitedAlice, visitedBob))
+                if turn < len(self.pathBob):
+                    visitedBob.remove(self.pathBob[turn])
+                visitedAlice.remove(alice)
 
             return result + (maxSum if maxSum != -(10 ** 9 + 1) else 0)
         
-        return backtrackingForAlice(0, 0, set())
+        return backtrackingForAlice(0, 0, set(), set())
             
 # @lc code=end
 
