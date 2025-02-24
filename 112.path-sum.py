@@ -11,7 +11,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from typing import List
+from typing import List, Optional
 
 class Solution:
     def isPath(self, root, targetSum):
