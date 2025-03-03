@@ -22,8 +22,6 @@ class Solution:
                 nextGreater[i][0] = stack[-1][0]
                 nextGreater[i][1] = stack[-1][1]
 
-        print(nextGreater, stack, stringList)
-
         for i in range(len(stringList)):
             if nextGreater[i][0] != -1:
                 stringList[i], stringList[nextGreater[i][1]] = stringList[nextGreater[i][1]], stringList[i]
