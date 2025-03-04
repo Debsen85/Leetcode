@@ -25,7 +25,4 @@ class Solution:
             else:
                 nums[i] = product // nums[i]
         return nums
-        
-        
 # @lc code=end
-

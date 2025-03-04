@@ -9,10 +9,9 @@ from typing import List
 
 class Solution:
     def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
-        maxCandies = max(candies)
-        answer = []
-        for candy in candies:
-            answer.append((candy + extraCandies) >= maxCandies)
-        return answer
+        maxCandy = max(candies)
+        for i in range(len(candies)):
+            candies[i] = (candies[i] + extraCandies) >= maxCandy
+        return candies
 # @lc code=end
 
