@@ -10,19 +10,19 @@ from typing import List
 
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
-        for i in range(1, len(nums)):
-            nums[i] = nums[i] + nums[i - 1]
+        prefixSum = [0]
+
+        for num in nums:
+            prefixSum.append(prefixSum[-1] + num)
+
+        total = prefixSum[-1]
+
+        print(prefixSum, total)
+
+        for i in range(1, len(prefixSum)):
+            if prefixSum[i - 1] == total - prefixSum[i]:
+                return (i - 1)
         
-        for i in range(len(nums)):
-            if i == 0:
-                if nums[-1] - nums[i] == 0:
-                    return i
-            elif i == len(nums) - 1:
-                if nums[i - 1] == 0:
-                    return i
-            else:
-                if nums[-1] - nums[i] == nums[i - 1]:
-                    return i
         return -1
 # @lc code=end
 
