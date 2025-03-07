@@ -12,40 +12,35 @@
 #         self.next = next
 from typing import Optional
 
-
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
-        prev = None
         slow = head
         fast = head
 
-        while fast and fast.next:
-            prev = slow
-            fast = fast.next.next
+        while fast.next.next:
             slow = slow.next
+            fast = fast.next.next
 
-        curr = slow
-        currHead = slow
+        prev = slow
+        mid = slow.next
+        curr = mid
 
         while curr.next:
             temp = curr.next
+            curr.next = temp.next
             prev.next = temp
-            if curr.next.next:
-                curr.next = curr.next.next
-            else:
-                curr.next = None
-            temp.next = currHead
-            currHead = temp
+            temp.next = mid
+            mid = temp
         
         answer = 0
-        currMid = currHead
-        currStart = head
 
-        while currMid:
-            answer = max(answer, currMid.val + currStart.val)
-            currStart = currStart.next
-            currMid = currMid.next
-        
+        front = head
+
+        while mid:
+            answer = max(answer, front.val + mid.val)
+            front = front.next
+            mid = mid.next
+
         return answer
 
 # @lc code=end

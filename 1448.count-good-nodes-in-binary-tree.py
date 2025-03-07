@@ -13,16 +13,16 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        answer = [0]
+        self.answer = 0
         def backtracking(root, maxTillNow):
             if root == None:
                 return
             if root.val >= maxTillNow:
                 maxTillNow = root.val
-                answer[0] += 1
+                self.answer += 1
             backtracking(root.right, maxTillNow)
             backtracking(root.left, maxTillNow)
         backtracking(root, root.val)
-        return answer[0]
+        return self.answer
 # @lc code=end
 
