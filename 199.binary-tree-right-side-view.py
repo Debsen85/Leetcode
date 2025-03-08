@@ -1,7 +1,7 @@
 #
-# @lc app=leetcode id=1161 lang=python3
+# @lc app=leetcode id=199 lang=python3
 #
-# [1161] Maximum Level Sum of a Binary Tree
+# [199] Binary Tree Right Side View
 #
 
 # @lc code=start
@@ -12,32 +12,26 @@
 #         self.left = left
 #         self.right = right
 from collections import deque
-from typing import Optional
+from typing import List, Optional
 
 class Solution:
-    def maxLevelSum(self, root: Optional[TreeNode]) -> int:
-        level, answer = 0, 0
-        maxTotal = float("-inf")
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+
         queue = deque()
         queue.append(root)
+        answer = []
 
         while queue:
-            total = 0
+            answer.append(queue[-1].val)
             for _ in range(len(queue)):
                 node = queue.popleft()
-                total += node.val
-
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            
-            level += 1  
-            if total > maxTotal:
-                answer = level
-                maxTotal = total
         
         return answer
-        
 # @lc code=end
 

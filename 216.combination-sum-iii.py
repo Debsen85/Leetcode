@@ -11,18 +11,21 @@ from typing import List
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         answer = []
-        def backtracking(i, current, total):
-            if total == n:
-                if len(current) == k:
-                    answer.append(current[:])
+
+        def backtracking(value, current, n):
+            if len(current) == k and n == 0:
+                answer.append(current[:])
                 return
-            if i == 10 or total > n:
+            if len(current) > k or n < 0 or value == 10:
                 return
-            current.append(i)
-            backtracking(i + 1, current, total + i)
+            
+            current.append(value)
+            backtracking(value + 1, current, n - value)
+
             current.pop()
-            backtracking(i + 1, current, total)
-        backtracking(1, [], 0)
+            backtracking(value + 1, current, n)
+            
+        backtracking(1, [], n)
         return answer
 # @lc code=end
 
