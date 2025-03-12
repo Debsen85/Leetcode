@@ -8,30 +8,30 @@
 
 class Solution {
 
-    static int[][] cache;
-
-    public static int help(int m, int n, int r, int c, int [][] cache) {
-        if (r == m || c == n) {
+    public int uniquePath(int i, int j, int m, int n, int [][] dp) {
+        if ((i == m) || (j == n)) {
             return 0;
         }
-        if (r == m  - 1 && c == n - 1) {
+        if ((i == m - 1) && (j == n - 1)) {
             return 1;
         }
-        if (cache[r][c] != 0) {
-            return cache[r][c];
+        if (dp[i][j] != -1) {
+            return dp[i][j];
         }
-        cache[r][c] = help(m, n, r + 1, c, cache) + help(m, n, r, c + 1, cache);
-        return cache[r][c];
+        
+        dp[i][j] = uniquePath(i + 1, j, m, n, dp) + uniquePath(i, j + 1, m, n, dp);
+
+        return dp[i][j];
     }
 
     public int uniquePaths(int m, int n) {
-        cache = new int[m][n];
+        int dp[][] = new int[m][n];
         for (int i = 0; i < m; i ++) {
             for (int j = 0; j < n; j ++) {
-                cache[i][j] = 0;
+                dp[i][j] = -1;
             }
         }
-        return help(m, n, 0, 0, cache);
+        return uniquePath(0, 0, m, n, dp);
     }
 }
 // @lc code=end
