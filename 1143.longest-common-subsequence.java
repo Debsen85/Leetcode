@@ -6,30 +6,31 @@
 
 // @lc code=start
 class Solution {
-    private static int[][] cache;
-    private static int help(String text1, String text2, int i, int j) {
-        if (i == text1.length() || j == text2.length()) {
+    public int solution(int r, int c, int row, int col, String text1, String text2, int [][] dp) {
+        if ((r == row) || (c == col)) {
             return 0;
         }
-        if (cache[i][j] != -1) {
-            return cache[i][j];
+        if (dp[r][c] != -1) {
+            return dp[r][c];
         }
-        if (text1.charAt(i) == text2.charAt(j)) {
-            cache[i][j] = 1 + help(text1, text2, i + 1, j + 1);
+
+        if (text1.charAt(r) == text2.charAt(c)) {
+            dp[r][c] = 1 + solution(r + 1, c + 1, row, col, text1, text2, dp);
         } else {
-            cache[i][j] = Math.max(help(text1, text2, i + 1, j), help(text1, text2, i, j + 1));
+            dp[r][c] = Math.max(solution(r, c + 1, row, col, text1, text2, dp), solution(r + 1, c, row, col, text1, text2, dp));
         }
-        return cache[i][j];   
+        return dp[r][c];
     }
+
     public int longestCommonSubsequence(String text1, String text2) {
-        int m = text1.length(), n = text2.length();
-        cache = new int[m][n];
-        for (int i = 0; i < m; i ++) {
-            for (int j = 0; j < n; j ++) {
-                cache[i][j] = -1;
+        int row = text1.length(), col = text2.length();
+        int dp[][] = new int[row][col];
+        for (int i = 0; i < row; i ++) {
+            for (int j = 0; j < col; j ++) {
+                dp[i][j] = -1;
             }
-        }
-        return help(text1, text2, 0, 0);
+        } 
+        return solution(0, 0, row, col, text1, text2, dp);
     }
 }
 // @lc code=end
