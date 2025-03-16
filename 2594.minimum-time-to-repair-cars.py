@@ -5,8 +5,6 @@
 #
 
 # @lc code=start
-from cmath import sqrt
-from typing import List
 
 class Solution:
     def repairCars(self, ranks: List[int], cars: int) -> int:
