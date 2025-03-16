@@ -19,11 +19,8 @@ class Solution:
                 return 0
             if index in dp:
                 return dp[index]
-
-            result = 0
-
-            if s[index] in mapper:
-                result += backtracking(index + 1)
+                
+            result = backtracking(index + 1)
 
             if index < len(s) - 1 and s[index : index + 2] in mapper:
                 result += backtracking(index + 2)
