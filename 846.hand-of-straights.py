@@ -12,15 +12,18 @@ class Solution:
         if len(nums) % k:
             return False
         numMap = Counter(nums)
-        while numMap:
-            prev = min(numMap.keys())
-            for num in range(prev, prev + k):
-                if num in numMap:
-                    numMap[num] -= 1
-                    if numMap[num] == 0:
-                        numMap.pop(num)
+        nums.sort()
+
+        for num in nums:
+            if numMap[num] == 0:
+                continue
+            howMany = numMap[num]
+            numMap[num] = 0
+            for val in range(num + 1, num + k):
+                if val in numMap and numMap[val] >= howMany:
+                    numMap[val] -= howMany
                 else:
-                    return False 
+                    return False
         return True
 # @lc code=end
 
