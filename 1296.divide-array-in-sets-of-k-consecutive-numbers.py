@@ -17,10 +17,11 @@ class Solution:
         for num in nums:
             if numMap[num] == 0:
                 continue
-            numMap[num] -= 1
+            howMany = numMap[num]
+            numMap[num] = 0
             for val in range(num + 1, num + k):
-                if val in numMap and numMap[val]:
-                    numMap[val] -= 1
+                if val in numMap and numMap[val] >= howMany:
+                    numMap[val] -= howMany
                 else:
                     return False
         return True
