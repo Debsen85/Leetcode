@@ -6,6 +6,7 @@
 
 # @lc code=start
 from heapq import heapify, heappop
+from math import sqrt
 from typing import List
 
 class Solution:
