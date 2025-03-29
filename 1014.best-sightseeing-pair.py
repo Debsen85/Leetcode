@@ -20,4 +20,3 @@ class Solution:
             max_left_score[i] = max(max_left_score[i - 1], current_left_score)
         return max_score
 # @lc code=end
-
