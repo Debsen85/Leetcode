@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
         l, r, d, t = 0, 0, float("inf"), -1
