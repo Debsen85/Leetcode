@@ -7,6 +7,7 @@
 # @lc code=start
 from collections import Counter
 from math import ceil
+from typing import List
 
 class Solution:
     def numRabbits(self, answers: List[int]) -> int:
