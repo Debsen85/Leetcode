@@ -9,12 +9,12 @@ from typing import List
 
 class Solution:
     def countSubarrays(self, nums: List[int]) -> int:
-        l, r, ans = 0, 2, 0
+        l, r, answer = 0, 2, 0
         while r < len(nums):
-            if (2 * (nums[r] + nums[l])) == (nums[l + 1]):
-                ans += 1
-            r += 1
+            if (nums[l] + nums[r]) * 2 == nums[l + 1]:
+                answer += 1
             l += 1
-        return ans
+            r += 1
+        return answer 
 # @lc code=end
 
