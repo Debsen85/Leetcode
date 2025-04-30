@@ -9,13 +9,13 @@ from typing import List
 
 class Solution:
     def canAliceWin(self, nums: List[int]) -> bool:
-        sumTotal = 0
-        sumSingle = 0
+        sum1, sum2 = 0, 0
         for num in nums:
             if num < 10:
-                sumSingle += num
-            sumTotal += num
-        return False if (sumSingle == sumTotal - sumSingle) else True 
+                sum1 += num
+            else:
+                sum2 += num
+        return sum1 != sum2 
         
 # @lc code=end
 
